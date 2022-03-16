@@ -1,24 +1,27 @@
 ﻿using Hotel_Management.Data;
 using Hotel_Management.Model.Entity;
 using Hotel_Management.Repository.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace Hotel_Management.Repository
 {
     public class HotelRepository : IHotelRepository
     {
-        private readonly HotelManagemnetContext _context;
-        public HotelRepository(HotelManagemnetContext context)
+        private readonly HotelManagementContext _context;
+        public HotelRepository(HotelManagementContext context)
         {
             _context = context;
         }
-        public Task<IEnumerable<Hotel>> Get()
+        public async Task<IEnumerable<Hotel>> Get()
         {
-            throw new NotImplementedException();
+            return await _context.Hotels.ToListAsync();
         }
 
-        public Task<Hotel> GetById(int id)
+        public async Task<Hotel> GetById(int id)
         {
-            throw new NotImplementedException();
+            return await _context.Hotels
+                                    .Where(x => x.Id == id)
+                                    .FirstOrDefaultAsync(); 
         }
 
         public void Create(Hotel hotel)
@@ -35,9 +38,9 @@ namespace Hotel_Management.Repository
             _context.Update(hotel);
         }
 
-        public Task<bool> SaveChangesAsync()
+        public async Task<bool> SaveChangesAsync()
         {
-            throw new NotImplementedException();
+            return await _context.SaveChangesAsync() > 0;
         }
     }
 }

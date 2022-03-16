@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Hotel_Management.Data
 {
-    public class HotelManagemnetContext : DbContext
+    public class HotelManagementContext : DbContext
     {
-        public HotelManagemnetContext(DbContextOptions<HotelManagemnetContext> options) : base(options)
+        public HotelManagementContext(DbContextOptions<HotelManagementContext> options) : base(options)
         {
         }
         public DbSet<Hotel> Hotels { get; set; }

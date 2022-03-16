@@ -1,4 +1,6 @@
 using Hotel_Management.Data;
+using Hotel_Management.Repository;
+using Hotel_Management.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,10 +11,12 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<HotelManagemnetContext>(options =>
+builder.Services.AddDbContext<HotelManagementContext>(options =>
 {
     options.UseSqlServer(builder.Configuration["ConnectionStrings:Default"]);
 });
+builder.Services.AddScoped<IHotelRepository, HotelRepository>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
