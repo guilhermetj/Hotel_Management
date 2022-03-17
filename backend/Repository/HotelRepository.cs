@@ -14,7 +14,8 @@ namespace Hotel_Management.Repository
         }
         public async Task<IEnumerable<Hotel>> Get()
         {
-            return await _context.Hotels.ToListAsync();
+            return await _context.Hotels
+                                    .ToListAsync();
         }
 
         public async Task<Hotel> GetById(int id)

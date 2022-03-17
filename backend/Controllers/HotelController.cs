@@ -1,4 +1,6 @@
-﻿using Hotel_Management.Model.Entity;
+﻿using AutoMapper;
+using Hotel_Management.Model.Dtos.HotelDtos;
+using Hotel_Management.Model.Entity;
 using Hotel_Management.Repository.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,17 +11,21 @@ namespace Hotel_Management.Controllers
     public class HotelController : ControllerBase
     {
         private readonly IHotelRepository _repository;
+        private readonly IMapper _mapper;
 
-        public HotelController(IHotelRepository repository)
+        public HotelController(IHotelRepository repository, IMapper mapper)
         {
             _repository = repository;
+            _mapper = mapper;
         }
         [HttpGet]
         public async Task<IActionResult> Get()
         {
             var hotel = await _repository.Get();
 
-            return Ok(hotel);
+            var hotelReturn = _mapper.Map<IEnumerable<HotelDto>>(hotel);
+
+            return Ok(hotelReturn);
         }
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
@@ -27,28 +33,29 @@ namespace Hotel_Management.Controllers
 
             var hotel = await _repository.GetById(id);
 
-            return hotel != null ? Ok(hotel) : NotFound("hotel not found");
+            var hotelReturn = _mapper.Map<HotelDetailsDto>(hotel);
+
+            return hotelReturn != null ? Ok(hotelReturn) : NotFound("hotel not found");
         }
         [HttpPost]
-        public async Task<IActionResult> Add(Hotel hotel)
+        public async Task<IActionResult> Add(HotelCreateDto hotelCreateDto)
         {
+            var hotel = _mapper.Map<Hotel>(hotelCreateDto);
 
             _repository.Create(hotel);
 
             return await _repository.SaveChangesAsync() ? Ok("Hotel created") : BadRequest("Error when creating") ;
         }
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, Hotel hotel)
+        public async Task<IActionResult> Update(int id, HotelUpdateDto hotelUpdateDto)
         {
 
             var hotelBanco = await _repository.GetById(id);
             if (hotelBanco == null) return NotFound("hotel not found");
 
-            hotelBanco.Name = hotel.Name ?? hotelBanco.Name;
-            hotelBanco.Location = hotel.Location ?? hotelBanco.Location;
-            hotelBanco.NumRooms = hotel.NumRooms;
+            var hotel = _mapper.Map(hotelUpdateDto, hotelBanco);
 
-            _repository.Update(hotelBanco);
+            _repository.Update(hotel);
 
             return await _repository.SaveChangesAsync() ? Ok("Hotel updated") : BadRequest("Error when editing");
         }
@@ -58,12 +65,16 @@ namespace Hotel_Management.Controllers
 
             var hotelBanco = await _repository.GetById(id);
             if (hotelBanco == null) return NotFound("hotel not found");
-
-            hotelBanco.Active = false;
-
-            _repository.Update(hotelBanco);
-
-            return await _repository.SaveChangesAsync() ? Ok("Hotel Disabled") : BadRequest("Error when editing");
+            if(hotelBanco.Active == true)
+            {
+                hotelBanco.Active = false;
+            }
+            else if(hotelBanco.Active == false)
+            {
+                hotelBanco.Active = true; 
+            }
+                _repository.Update(hotelBanco);
+            return await _repository.SaveChangesAsync() ? Ok("Hotel disabled/activated success") : BadRequest("Error");
         }
 
     }
