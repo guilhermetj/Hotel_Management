@@ -8,5 +8,6 @@
         public int NumRooms { get; set; }
         public bool Active { get; set; } 
         public List<Room> Room { get; set; }
+        public List<Employee> Employee { get; set; }
     }
 }

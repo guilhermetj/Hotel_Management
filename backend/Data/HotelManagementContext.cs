@@ -10,12 +10,15 @@ namespace Hotel_Management.Data
         }
         public DbSet<Hotel> Hotels { get; set; }
         public DbSet<Room> Rooms { get; set; }
+        public DbSet<Employee> Employees { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
 
             builder.Entity<Room>().HasOne(x => x.Hotel).WithMany(p => p.Room).HasForeignKey(x => x.Hotel_id);
+            builder.Entity<Employee>().HasOne(x => x.Hotel).WithMany(p => p.Employee).HasForeignKey(x => x.Hotel_id);
+            builder.Entity<Employee>().Property(x => x.DeletionAt).HasDefaultValue(null);
 
         }
         protected override void ConfigureConventions(ModelConfigurationBuilder configuration)
