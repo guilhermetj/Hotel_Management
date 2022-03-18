@@ -9,7 +9,7 @@ namespace Hotel_Management.Data
         {
         }
         public DbSet<Hotel> Hotels { get; set; }
-        public DbSet<Room> rooms { get; set; }
+        public DbSet<Room> Rooms { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
