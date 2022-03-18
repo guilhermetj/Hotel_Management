@@ -7,5 +7,6 @@
         public string Location { get; set; }
         public int NumRooms { get; set; }
         public bool Active { get; set; } 
+        public List<Room> Room { get; set; }
     }
 }
