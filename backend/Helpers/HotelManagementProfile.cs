@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Hotel_Management.Model.Dtos.ClientDtos;
 using Hotel_Management.Model.Dtos.EmployeeDtos;
 using Hotel_Management.Model.Dtos.HotelDtos;
 using Hotel_Management.Model.Dtos.RoomDtos;
@@ -37,6 +38,16 @@ namespace Hotel_Management.Helpers
             CreateMap<EmployeeCreateDto, Employee>();
 
             CreateMap<EmployeeUpdateDto, Employee>().ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
+
+            //Clients
+
+            CreateMap<Client, ClientDto>();
+
+            CreateMap<Client, ClientDetailsDto>();
+
+            CreateMap<ClientCreateDto, Client>();
+
+            CreateMap<ClientUpdateDto, Client>().ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
 
         }
     }
