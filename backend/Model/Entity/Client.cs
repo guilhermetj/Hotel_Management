@@ -8,5 +8,6 @@
         public string Phone { get; set; }
         public string Address { get; set; }
         public DateTime? DeletionAt { get; set; }
+        public List<Reservation> Reservation { get; set; }
     }
 }

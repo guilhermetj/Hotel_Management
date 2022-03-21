@@ -123,6 +123,34 @@ namespace Hotel_Management.Migrations
                     b.ToTable("Hotels");
                 });
 
+            modelBuilder.Entity("Hotel_Management.Model.Entity.Reservation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("Client_id")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Room_id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Client_id");
+
+                    b.HasIndex("Room_id");
+
+                    b.ToTable("Reservations");
+                });
+
             modelBuilder.Entity("Hotel_Management.Model.Entity.Room", b =>
                 {
                     b.Property<int>("Id")
@@ -160,6 +188,25 @@ namespace Hotel_Management.Migrations
                     b.Navigation("Hotel");
                 });
 
+            modelBuilder.Entity("Hotel_Management.Model.Entity.Reservation", b =>
+                {
+                    b.HasOne("Hotel_Management.Model.Entity.Client", "Client")
+                        .WithMany("Reservation")
+                        .HasForeignKey("Client_id")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Hotel_Management.Model.Entity.Room", "Room")
+                        .WithMany("Reservation")
+                        .HasForeignKey("Room_id")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Client");
+
+                    b.Navigation("Room");
+                });
+
             modelBuilder.Entity("Hotel_Management.Model.Entity.Room", b =>
                 {
                     b.HasOne("Hotel_Management.Model.Entity.Hotel", "Hotel")
@@ -171,11 +218,21 @@ namespace Hotel_Management.Migrations
                     b.Navigation("Hotel");
                 });
 
+            modelBuilder.Entity("Hotel_Management.Model.Entity.Client", b =>
+                {
+                    b.Navigation("Reservation");
+                });
+
             modelBuilder.Entity("Hotel_Management.Model.Entity.Hotel", b =>
                 {
                     b.Navigation("Employee");
 
                     b.Navigation("Room");
+                });
+
+            modelBuilder.Entity("Hotel_Management.Model.Entity.Room", b =>
+                {
+                    b.Navigation("Reservation");
                 });
 #pragma warning restore 612, 618
         }
