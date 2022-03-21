@@ -2,6 +2,7 @@
 using Hotel_Management.Model.Dtos.ClientDtos;
 using Hotel_Management.Model.Dtos.EmployeeDtos;
 using Hotel_Management.Model.Dtos.HotelDtos;
+using Hotel_Management.Model.Dtos.ReservationDtos;
 using Hotel_Management.Model.Dtos.RoomDtos;
 using Hotel_Management.Model.Entity;
 
@@ -49,6 +50,16 @@ namespace Hotel_Management.Helpers
 
             CreateMap<ClientUpdateDto, Client>().ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
 
+
+            //Reservation
+
+            CreateMap<Reservation, ReservationDto>();
+
+            CreateMap<Reservation, ReservationDetailsDto>();
+
+            CreateMap<ReservationCreateDto, Reservation>();
+
+            CreateMap<ReservationUpdateDto, Reservation>().ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
         }
     }
 }
