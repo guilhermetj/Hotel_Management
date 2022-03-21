@@ -34,11 +34,6 @@ namespace Hotel_Management.Repository
         {
             _context.Update(hotel);
         }
-        public void Disable(Hotel hotel)
-        {
-            _context.Update(hotel);
-        }
-
         public async Task<bool> SaveChangesAsync()
         {
             return await _context.SaveChangesAsync() > 0;

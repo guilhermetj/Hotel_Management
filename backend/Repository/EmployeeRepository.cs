@@ -35,10 +35,6 @@ namespace Hotel_Management.Repository
         {
             _context.Update(employee);
         }
-        public void Disable(Employee employee)
-        {
-            _context.Update(employee);
-        }
         public async Task<bool> SaveChangesAsync()
         {
             return _context.SaveChanges() > 0;

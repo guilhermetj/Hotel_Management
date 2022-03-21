@@ -58,7 +58,7 @@ namespace Hotel_Management.Controllers
             return await _repository.SaveChangesAsync() ? Ok("Client edited success") : BadRequest("Error when editing client");
         }
         [HttpPut("disable/{id}")]
-        public async Task<IActionResult> Update(int id)
+        public async Task<IActionResult> Disable(int id)
         {
             var clientBanco = await _repository.GetById(id);
             if (clientBanco == null) return BadRequest("Client Not Found");

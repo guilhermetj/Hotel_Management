@@ -8,7 +8,6 @@ namespace Hotel_Management.Repository.Interfaces
         Task<Employee> GetById(int id);
         void Create(Employee employee);
         void Update(Employee employee);
-        void Disable(Employee employee);
         Task<bool> SaveChangesAsync();
     }
 }

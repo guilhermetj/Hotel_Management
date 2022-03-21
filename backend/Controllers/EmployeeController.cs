@@ -65,7 +65,7 @@ namespace Hotel_Management.Controllers
 
             employeebanco.DeletionAt = DateTime.Now;
 
-            _repository.Disable(employeebanco);
+            _repository.Update(employeebanco);
 
             return await _repository.SaveChangesAsync() ? Ok("Employee disabled success") : BadRequest("Error when deactivating employee");
         }
