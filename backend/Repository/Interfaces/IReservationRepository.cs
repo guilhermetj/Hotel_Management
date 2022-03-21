@@ -6,8 +6,9 @@ namespace Hotel_Management.Repository.Interfaces
     {
         Task<IEnumerable<Reservation>> Get();
         Task<Reservation> GetById(int id);
+        Task<Reservation> GetByRoomId(int id);
         void Create(Reservation reservation);
-        void Update(Reservation reservation);
+        void Cancel(Reservation reservation);
         Task<bool> SaveChangesAsync();
     }
 }

@@ -30,11 +30,18 @@ namespace Hotel_Management.Repository
                                         .Where(r => r.Id == id)
                                         .FirstOrDefaultAsync();
         }
+        public async Task<Reservation> GetByRoomId(int id)
+        {
+            return await _context.Reservations
+                                        .Where(r => r.Room_id == id)
+                                        .FirstOrDefaultAsync();
+        }
+
         public void Create(Reservation reservation)
         {
             _context.Add(reservation);
         }
-        public void Update(Reservation reservation)
+        public void Cancel(Reservation reservation)
         {
            _context.Update(reservation);
         }
@@ -42,5 +49,6 @@ namespace Hotel_Management.Repository
         {
             return await _context.SaveChangesAsync() > 0;
         }
+
     }
 }
