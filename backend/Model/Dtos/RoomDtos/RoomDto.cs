@@ -5,7 +5,6 @@ namespace Hotel_Management.Model.Dtos.RoomDtos
 {
     public class RoomDto
     {
-        public int Id { get; set; }
         public string RoomType { get; set; }
         public decimal Price { get; set; }
         public HotelDto Hotel { get; set; }

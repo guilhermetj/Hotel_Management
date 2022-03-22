@@ -15,7 +15,9 @@ namespace Hotel_Management.Repository
         }
         public async Task<IEnumerable<Client>> Get()
         {
-            return await _context.Clients.ToListAsync();
+            return await _context.Clients
+                                    .Where(x => x.DeletionAt == null)
+                                    .ToListAsync();
         }
 
         public async Task<Client> GetById(int id)

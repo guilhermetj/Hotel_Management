@@ -43,7 +43,8 @@ namespace Hotel_Management.Controllers
         {
             var reservationStatus = await _repository.GetByRoomId(reservationCreateDto.Room_id);
             if (reservationStatus != null && reservationStatus.Status == "Reservado")
-                 return BadRequest("Room has already been booked");
+                return BadRequest("Room has already been booked");
+
 
             var reservation = _mapper.Map<Reservation>(reservationCreateDto);
             reservation.Status = "Reservado";

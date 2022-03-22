@@ -15,14 +15,16 @@ namespace Hotel_Management.Repository
         public async Task<IEnumerable<Payment>> Get()
         {
             return await _context.Payments
-                                 .Include(x => x.Reservation)
+                                 .Include(x => x.Reservation).ThenInclude(x => x.Client)
+                                 .Include(x => x.Reservation).ThenInclude(x => x.Room).ThenInclude(x => x.Hotel)
                                  .ToListAsync();
         }
 
         public async Task<Payment> GetById(int id)
         {
             return await _context.Payments
-                                    .Include(x => x.Reservation)
+                                    .Include(x => x.Reservation).ThenInclude(x => x.Client)
+                                    .Include(x => x.Reservation).ThenInclude(x => x.Room).ThenInclude(x => x.Hotel)
                                     .Where(x => x.Id == id)
                                     .FirstOrDefaultAsync();
         }

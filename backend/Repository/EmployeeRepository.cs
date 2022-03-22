@@ -16,6 +16,7 @@ namespace Hotel_Management.Repository
         {
             return await _context.Employees
                                    .Include(x => x.Hotel)
+                                   .Where(x => x.DeletionAt == null)
                                    .ToListAsync();
         }
 

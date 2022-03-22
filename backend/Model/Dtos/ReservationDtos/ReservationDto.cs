@@ -5,7 +5,6 @@ namespace Hotel_Management.Model.Dtos.ReservationDtos
 {
     public class ReservationDto
     {
-        public int Id { get; set; }
         public string Status { get; set; }
         public ClientDto Client { get; set; }
         public RoomDto Room { get; set; }
