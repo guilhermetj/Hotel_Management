@@ -2,7 +2,7 @@
 # Hotel Management
 ## 💡 Sobre o Projeto
 
-Uma API para o gerenciamento de hotéis, funcionarios e reservas
+Uma API para o gerenciamento de hotéis, funcionários e reservas
 
 ## 🚀 Tecnologias utilizadas
 
