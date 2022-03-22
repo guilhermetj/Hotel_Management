@@ -13,6 +13,7 @@ namespace Hotel_Management.Data
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Client> Clients { get; set; }
         public DbSet<Reservation> Reservations { get; set; }
+        public DbSet<Payment> Payments { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -23,7 +24,8 @@ namespace Hotel_Management.Data
             builder.Entity<Employee>().Property(x => x.DeletionAt).HasDefaultValue(null);
             builder.Entity<Client>().Property(x => x.DeletionAt).HasDefaultValue(null);
             builder.Entity<Reservation>().HasOne(x => x.Client).WithMany(p => p.Reservation).HasForeignKey(x => x.Client_id).OnDelete(DeleteBehavior.NoAction);
-            builder.Entity<Reservation>().HasOne(x => x.Room).WithMany(p => p.Reservation).HasForeignKey(x => x.Room_id).OnDelete(DeleteBehavior.Restrict) ;
+            builder.Entity<Reservation>().HasOne(x => x.Room).WithMany(p => p.Reservation).HasForeignKey(x => x.Room_id).OnDelete(DeleteBehavior.Restrict);
+            builder.Entity<Payment>().HasOne(x => x.Reservation).WithOne(p => p.Payment).HasForeignKey<Payment>(x => x.Reservation_id);
         }
         protected override void ConfigureConventions(ModelConfigurationBuilder configuration)
         {
