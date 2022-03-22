@@ -2,6 +2,7 @@
 using Hotel_Management.Model.Dtos.ClientDtos;
 using Hotel_Management.Model.Dtos.EmployeeDtos;
 using Hotel_Management.Model.Dtos.HotelDtos;
+using Hotel_Management.Model.Dtos.PaymentDtos;
 using Hotel_Management.Model.Dtos.ReservationDtos;
 using Hotel_Management.Model.Dtos.RoomDtos;
 using Hotel_Management.Model.Entity;
@@ -60,6 +61,16 @@ namespace Hotel_Management.Helpers
             CreateMap<ReservationCreateDto, Reservation>();
 
             CreateMap<ReservationUpdateDto, Reservation>().ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
+
+            //Payment
+
+            CreateMap<Payment, PaymentDto>();
+
+            CreateMap<Payment, PaymentDetailsDto>();
+
+            CreateMap<PaymentCreateDto, Payment>();
+
+            CreateMap<PaymentUpdateDto, Payment>().ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
         }
     }
 }
