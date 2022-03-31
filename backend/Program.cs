@@ -1,3 +1,4 @@
+using FluentValidation.AspNetCore;
 using Hotel_Management.Data;
 using Hotel_Management.Repository;
 using Hotel_Management.Repository.Interfaces;
@@ -9,7 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddFluentValidation(x => x.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly()));
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<HotelManagementContext>(options =>
