@@ -5,7 +5,7 @@ namespace Hotel_Management.Validators.ClientValidator
 {
     public class ClientCreateValidator : AbstractValidator<ClientCreateDto>
     {
-        ClientCreateValidator()
+        public ClientCreateValidator()
         {
             RuleFor(x => x.Name).NotEmpty().NotNull().Length(2, 10);
             RuleFor(x => x.LastName).NotEmpty().NotNull().Length(2, 10);
